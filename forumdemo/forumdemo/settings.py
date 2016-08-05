@@ -39,6 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 )
 
+STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +59,7 @@ ROOT_URLCONF = 'forumdemo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
