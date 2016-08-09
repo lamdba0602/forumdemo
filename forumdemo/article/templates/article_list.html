@@ -5,7 +5,7 @@
     <li><a href="/">主页</a></li>
     <li class="active">{{ b.name }}</li>
   </ol>
-  <a href="#" class="btn btn-primary">发表文章</a>
+  <a href="/article/create/{{ b.id }}" class="btn btn-primary">发表文章</a>
   <br />
   <br />
   <table class="table table-bordered">
@@ -17,7 +17,7 @@
         <th>最后更新时间</th>
       </tr>
     <thead>
-    <body>
+    <tbody>
       {% for article in articles %}
       <tr>
         <td>{{ article.title }}</td>
@@ -26,7 +26,7 @@
         <td>{{ article.last_update_timestamp|date:"Y-m-d P" }}</td>
       </tr>
       {% endfor %}
-    </body>
+    </tbody>
   </table>
   
 </div>
