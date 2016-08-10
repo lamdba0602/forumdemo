@@ -10,20 +10,24 @@
     <div class="form-group">
       <label  class="col-md-1 control-label">标题</label>
       <div class="col-md-11">
-        <input type="text" class="form-control" placeholder="标题" name="title" value={{title}}>
+        <input type="text" class="form-control" placeholder="标题" name="title" value={{form.title.value}}>
       </div>
     </div>
     <div class="form-group">
       <label  class="col-sm-1 control-label">内容</label>
       <div class="col-sm-11">
-        <textarea class="form-control" rows="3" placeholder="内容" name="content">{{content}}</textarea>
+        <textarea class="form-control" rows="3" placeholder="内容" name="content">{{form.content.value}}</textarea>
         <br />
 	<button class="btn btn-primary">发表</button>
         <br />
         <br />
-        {% if error %}
-        <div class="alert alert-danger" role="alert">{{error}}</div>
-        {% endif %}
+	{% for field in form  %}
+	  {% if field.errors %}
+            {% for error in field.errors %}
+              <div class="alert alert-danger" role="alert">{{field.label}}: {{error}}</div>
+            {% endfor %}
+	  {% endif %}
+        {% endfor %}
       </div>
     </div>
   </form> 
