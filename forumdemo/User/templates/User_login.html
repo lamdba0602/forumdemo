@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="col-md-3">
+&nbsp;
+</div>
+<div class="col-md-6">
+  <div class="topSpace">
+    &nbsp;
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading" style="background-color: #085D9A; color: white;">
+      <b>登录</b>
+    </div>
+    <div class="panel-body">
+      <form method="post" action="/accounts/login/">
+      <input type='hidden' name='csrfmiddlewaretoken' value='cc2m19JVlsf13qgdRlY8If9KPsDjxZMv' />
+      
+      <div class="input-group">
+          <span class="input-group-addon">用户名（不是邮箱！）</span>
+          <input id="id_username" maxlength="254" name="username" type="text" class="form-control" />
+      </div>
+      <br />
+      <div class="input-group">
+          <span class="input-group-addon">密码&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <input id="id_password" name="password" type="password" class="form-control" />
+      </div>
+      <br />
+      <input type="submit" class="btn btn-primary" value="登录" />
+      <input type="hidden" name="next" value="" />
+      </form>
+    </div>
+    <div class="panel-footer">
+      <a href="/User/register">还没有账户?去注册...</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/accounts/password_reset/">忘记密码!</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
