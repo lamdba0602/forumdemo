@@ -109,3 +109,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 from .secret import *
+LOGIN_REDIRECT_URL="/"

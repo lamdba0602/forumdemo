@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from article.forms import ArticleForm
 from article.models import Article
@@ -23,7 +24,7 @@ def article_list(request, block_id):
         "has_next": page_links[-1] + 1 <= p.num_pages,
         "next_page": page_no + 1, "previous_page": page_no - 1})
 
-
+@login_required
 def article_create(request, block_id):
     block_id = int(block_id)
     block = Block.objects.get(id=block_id)
@@ -33,6 +34,7 @@ def article_create(request, block_id):
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save(commit=False)
+            article.owner = request.user
             article.block = block
             article.status = 0
             article.save()
