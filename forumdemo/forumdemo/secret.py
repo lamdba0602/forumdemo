@@ -1,0 +1,6 @@
+EMAIL_USE_SSL = True
+EMAIL_HOST = "smtp.qq.com"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "743759846@qq.com"
+EMAIL_HOST_PASSWORD = "npsobdaacgejbcba"
+DEFAULT_FROM_EMAIL = "743759846@qq.com"

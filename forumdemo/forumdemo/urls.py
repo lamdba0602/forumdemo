@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^User/', include('User.urls')),
     url(r'^article/', include('article.urls')),
+    url(r'^activate/', include('activate.urls')),
 ]

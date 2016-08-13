@@ -11,9 +11,9 @@ def User_register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(form.data['username'], form.data['email'], form.data['password'])
-            user.is_active = True
+            user.is_active = False
             user.save()
-            return redirect("/User/login")
+            return redirect("/activate?id=%s" % user.id)
         else:
             return render(request, "User_register.html", {"form": form})
 
