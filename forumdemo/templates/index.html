@@ -18,6 +18,7 @@
   {% if user.is_authenticated %}
     <p> {{ user.username }} 欢迎来到论坛</p>
     <a href="/accounts/logout" class="btn btn-primary">登出</a>
+    <a href="/accounts/password_change" class="btn btn-primary">修改密码</a>
   {% else %}
     <p> 匿名用户</p>
     <a href="/User/register" class="btn btn-primary">注册</a>
