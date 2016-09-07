@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from article.forms import ArticleForm
 from article.models import Article
 from block.models import Block
+from comment.models import Comment
 
 
 def article_list(request, block_id):
@@ -62,7 +63,12 @@ def article_create(request, block_id):
 
 
 def article_detail(request, article_id):
+    page_no = int(request.GET.get("page_no", "1"))
     article_id = int(article_id)
     article = Article.objects.get(id=article_id)
+    comments = Comment.objects.filter(article=article).order_by("-id")
+    page_comments, pagination_data = paginate_queryset(comments, page_no, 1)
 
-    return render(request, "article_detail.html", {"article": article})
+    return render(request, "article_detail.html", {"article": article,
+                                                   "comments": page_comments,
+                                                   "pagination_data": pagination_data})

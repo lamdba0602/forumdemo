@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 import views
+from comment.views import comment_create
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^article/', include('article.urls')),
     url(r'^activate/', include('activate.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^comment/create/', comment_create),
 ]

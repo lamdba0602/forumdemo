@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'article',
     'User',
     'activate',
+    'comment',
 )
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
@@ -109,4 +110,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 from .secret import *
-LOGIN_REDIRECT_URL="/"
+LOGIN_REDIRECT_URL = "/"
