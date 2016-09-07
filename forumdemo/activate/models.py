@@ -8,7 +8,7 @@ class Activate(models.Model):
     deadline = models.DateTimeField("过期日期", auto_now_add=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         verbose_name = "激活码"
