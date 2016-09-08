@@ -19,45 +19,50 @@
       {% for comment in comments %}
       <tr>
         <td>作者:{{ comment.owner }}</td>
-        <td>评论内容:<br />{{ comment.content }}</td>
+        <td>评论内容:<br />{{ comment.content | linebreaksbr}}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
-      {% if pagination_data.has_previous %}
-        <li>
-          <a href="?page_no=1" >
-            <span aria-hidden="true">首页</span>
-          </a>
-        </li>
-        <li>
-          <a href="?page_no={{ pagination_data.previous_link }}" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-      {% endif %}
-      {% for page in pagination_data.page_links  %}
-        {% if page ==  pagination_data.page_no  %}
-          <li class="active"><a href="?page_no={{ page }}">{{ page }}</a></li>
-        {% else %}
-          <li><a href="?page_no={{ page }}">{{ page }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% if pagination_data.has_next %}
-        <li>
-          <a href="?page_no={{ pagination_data.next_link }}" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-        <li>
-          <a href="?page_no={{ pagination_data.page_cnt }}" >
-            <span aria-hidden="true">尾页</span>
-          </a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav>
+  {% include "page_divide.html" %}
+  <table class="table mainTable">
+    <tbody>
+      <tr>
+        <td class="author" width=10%>
+          <br />
+          <center><span id="commentLabel">回复</span><center>
+        </td>
+        <td class="content">
+          <textarea id="commentContent" class="form-control" rows="3" placeholder="评论内容" name="content"></textarea>
+          <br />
+          <button class="btn btn-primary" id="commentBtn">发表评论</button>
+          <br />
+          <br />
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.csrf.js"></script>
+<script type="text/javascript">
+$(document).ready(function (){
+  var article_id = {{ article.id }};
+  var page_cnt = {{ pagination_data.page_cnt }};
+
+  $("#commentBtn").click(function() {
+    var comment = $("#commentContent").val();
+    var param = {"article_id": article_id, "content": comment};
+    $.post("/comment/create/", param, function(data){
+      var ret = JSON.parse(data);
+      if (ret["status"] == "ok"){
+          $("#commentContent").val("");
+          window.location.href = "/article/detail/{{ article.id }}";
+      } else {
+          alert(ret["msg"]);
+      }
+    });
+  })
+})
+</script>
 {% endblock %}
