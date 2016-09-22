@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^activate/', include('activate.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^comment/create/', comment_create),
+    url(r'^message/', include('message.urls')),
 ]

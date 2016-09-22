@@ -16,7 +16,11 @@
 <div class="col-xs-12 col-md-4">
   <div class="well">个人中心</div>
   {% if user.is_authenticated %}
-    <p> {{ user.username }} 欢迎来到论坛</p>
+    <p> {{ user.username }} 欢迎来到论坛
+    {% if msg_cnt %}
+    <a href="/message/list"><span class="badge">{{ msg_cnt }}</span></a>
+    {% endif %} 
+    </p>
     <a href="/accounts/logout" class="btn btn-primary">登出</a>
     <a href="/accounts/password_change" class="btn btn-primary">修改密码</a>
   {% else %}

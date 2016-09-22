@@ -1,9 +1,9 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 import json
 from article.models import Article
+from message.models import Message
 from .forms import CommentForm
 from .models import Comment
 
@@ -25,6 +25,7 @@ def comment_create(request):
         comment.article = article
         comment.to_comment = to_comment
         comment.save()
+        message_create(request.user, to_comment, comment.content, article_id)
         return json_response({"status": "ok", "msg": ""})
     else:
         msg = ""
@@ -33,6 +34,17 @@ def comment_create(request):
                 for error in field.errors:
                     msg += error
         return json_response({"status": "error", "msg": msg})
+
+
+def message_create(owner, to_comment, content, article_id):
+    if to_comment:
+        real_content = ("您的评论'%s'被评论了" % to_comment.content)
+    else:
+        article = Article.objects.get(id=article_id)
+        real_content = ("您的文章'%s'被评论了" % article.title)
+    link = ("/article/detail/%s" % article_id)
+    message = Message(owner=owner, content=real_content, link=link)
+    message.save()
 
 
 def json_response(obj):

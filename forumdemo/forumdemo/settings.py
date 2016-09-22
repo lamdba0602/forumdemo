@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'User',
     'activate',
     'comment',
+    'message',
 )
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
