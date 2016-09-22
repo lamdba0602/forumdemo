@@ -29,3 +29,5 @@ urlpatterns = [
     url(r'^comment/create/', comment_create),
     url(r'^message/', include('message.urls')),
 ]
+
+admin.site.disable_action('delete_selected')
