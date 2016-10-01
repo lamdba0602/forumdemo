@@ -43,9 +43,11 @@ INSTALLED_APPS = (
     'activate',
     'comment',
     'message',
+    'usercenter',
 )
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'DjangoUeditor/static'),
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,3 +114,5 @@ STATIC_URL = '/static/'
 
 from .secret import *
 LOGIN_REDIRECT_URL = "/"
+MEDIA_ROOT = "/Users/mingdang1/Documents/userres/article/"
+MEDIA_URL = "http://forumdemo.com:8080/article/"

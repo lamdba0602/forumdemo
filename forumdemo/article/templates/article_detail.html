@@ -13,7 +13,10 @@
       <tr>
         <td>作者:{{ article.owner }}</td>
 	    <td>标题: {{ article.title }} <br />
-	        内容: <br /> {{ article.content }}
+	        内容: <br />
+		{% autoescape off %}
+		<div>{{ article.content }}</div>
+		{% endautoescape %}
 	    </td>
       </tr>
       {% for comment in comments %}

@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^comment/create/', comment_create),
     url(r'^message/', include('message.urls')),
+    url(r'^usercenter/', include('usercenter.urls')),
+    url(r'^ueditor/', include('DjangoUeditor.urls')),
 ]
 
 admin.site.disable_action('delete_selected')
