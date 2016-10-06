@@ -15,7 +15,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -23,9 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't$#vu@qg+=e3)v3_v317mcye8x^yon=ysyc6)#tvuo&m$#$sg^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "112.74.98.40"]
 
 
 # Application definition
@@ -114,5 +112,13 @@ STATIC_URL = '/static/'
 
 from .secret import *
 LOGIN_REDIRECT_URL = "/"
-MEDIA_ROOT = "/Users/mingdang1/Documents/userres/article/"
-MEDIA_URL = "http://forumdemo.com:8080/article/"
+
+import configparser
+config = configparser.ConfigParser()
+config_path = os.path.join(os.path.dirname(BASE_DIR), "conf/config.ini")
+config.read(config_path)
+DEBUG = config["default"].getboolean("debug")
+MEDIA_URL = config["default"]["media_url"]
+MEDIA_ROOT = config["default"]["media_root"]
+portrait_root = config["default"]["portrait_root"]
+portrait_url = config["default"]["portrait_url"]
