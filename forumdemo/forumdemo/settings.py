@@ -48,7 +48,7 @@ STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'DjangoUeditor/static'),
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,7 +57,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'middlewares.PrintParamsMiddleware',
 )
+
 
 ROOT_URLCONF = 'forumdemo.urls'
 
@@ -127,3 +129,37 @@ MEDIA_URL = config["default"]["media_url"]
 MEDIA_ROOT = config["default"]["media_root"]
 portrait_root = config["default"]["portrait_root"]
 portrait_url = config["default"]["portrait_url"]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(message)s'
+        },
+    },
+    'handlers': {
+        'info_record': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(os.path.dirname(BASE_DIR), 'log/info.log'),
+            'formatter': 'verbose'
+        },
+        'error_record': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(os.path.dirname(BASE_DIR), 'log/error.log'),
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'forumdemo': {
+            'handlers': ["info_record", "error_record"],
+            'level': 'DEBUG',
+        }
+    }
+}
+
+import logging
+
+LOGGER = logging.getLogger("forumdemo")
